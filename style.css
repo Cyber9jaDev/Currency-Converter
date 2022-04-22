@@ -54,6 +54,13 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+select{
+  background: lightslategrey;
+  color: white;
+}
+option{
+  color: white;
+}
 
 
 /* MEDIA QUERIES */

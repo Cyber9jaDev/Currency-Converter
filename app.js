@@ -9,7 +9,6 @@ class CurrencyConverter{
     window.addEventListener("DOMContentLoaded", this.loadWindow);
   }
 
-
   loadWindow(){
     CurrencyConverter.currencies();
   }
@@ -24,17 +23,12 @@ class CurrencyConverter{
     });
   }
 
-  static loadFromCurrencyField(data){
+  static loadCurrencies(data){
     const keys = Object.keys(data);
     CurrencyConverter.getKeys(keys, fromCurrency);
-  }
-
-  static loadToCurrencyField(data){
-    const keys = Object.keys(data);
     CurrencyConverter.getKeys(keys, toCurrency);
   }
 
-  // Functions
   static currencies(){
     fetch("https://api.vatcomply.com/currencies")
       .then((response) => {
@@ -42,17 +36,13 @@ class CurrencyConverter{
         return response.json();
       })
       .then((data) => {
-        CurrencyConverter.loadFromCurrencyField(data);
-        CurrencyConverter.loadToCurrencyField(data);
+        CurrencyConverter.loadCurrencies(data);
       })
       .catch((err) => {
         return err;
       });
   }
 
-  // Event Listeners
-
-  // 
 }
 
 
