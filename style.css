@@ -1,0 +1,79 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.form-row{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.amount-col, .from-currency-col, .to-currency-col, .arrow-col{
+  display: flex;
+  margin: 10px 6px;
+  flex-direction: column;
+}
+.arrow-col{
+  flex-basis: 10%;
+}
+.amount-col, .from-currency-col, .to-currency-col{
+  flex-basis: 30%;
+}
+.arrow{
+  display: flex;
+  color: white;
+  width: 80%;
+  background-color: lightskyblue;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  align-self: center;
+}
+label{
+  text-align: start;
+}
+input, select{
+  width: 100%;
+  outline: none;
+  border: 1px lightskyblue solid;
+  padding: 0 10px;
+  background-color: white;
+}
+input, select, .arrow{
+  height: 40px;
+}
+
+/* Remove arrow up and down from input */
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+  -webkit-appearance: none; 
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
+/* MEDIA QUERIES */
+
+@media only screen and (max-width: 700px) {
+  body {
+    background-color: lightblue;
+  }
+
+  .form-row{
+    flex-direction: column;
+    width: 100%;
+  }
+  .amount-col, .from-currency-col, .to-currency-col, .arrow-col{
+    width: 100%;
+  }
+  .arrow-col label{
+    display: none;
+  }
+  .arrow{
+    width: 100%;
+  }
+}
