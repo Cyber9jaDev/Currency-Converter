@@ -1,12 +1,13 @@
 const fromCurrency = document.querySelector(".from-currency");
 const toCurrency = document.querySelector(".to-currency");
 const amount = document.getElementById("amount");
-
-
+const output = document.getElementById("output");
+const result = document.getElementById("result");
 
 class CurrencyConverter{
   constructor(){
     window.addEventListener("DOMContentLoaded", this.loadWindow);
+    amount.addEventListener("input", this.updateOutput);
   }
 
   loadWindow(){
@@ -42,6 +43,18 @@ class CurrencyConverter{
         return err;
       });
   }
+
+  updateOutput(e){
+    output.innerText = e.target.value;
+    result.innerText = e.target.value;
+
+  }
+
+  
+
+
+
+
 
 }
 

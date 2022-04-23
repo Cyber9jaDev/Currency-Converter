@@ -55,21 +55,24 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 select{
-  background: lightslategrey;
-  color: white;
+  background: rgb(198, 214, 231);
+  color: black;
 }
-option{
-  color: white;
+.results-container{
+  flex-direction: row;
+  align-items: center;
 }
 
-
+.results-container-1, .results-container-3{
+  word-wrap: break-word;
+  word-break: break-all;
+}
 /* MEDIA QUERIES */
 
 @media only screen and (max-width: 700px) {
-  body {
+  /* body {
     background-color: lightblue;
-  }
-
+  } */
   .form-row{
     flex-direction: column;
     width: 100%;
@@ -82,5 +85,10 @@ option{
   }
   .arrow{
     width: 100%;
+  }
+  .results-container{
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
   }
 }
