@@ -1,0 +1,103 @@
+let convertFrom = document.querySelector("#from-currency");
+let convertTo = document.querySelector("#to-currency");
+const amount = document.getElementById("amount");
+const output = document.getElementById("output");
+const result = document.getElementById("result");
+
+// class CurrencyConverter{
+function constr(){
+  convertFrom.addEventListener("input", calculate);
+  // convertTo.addEventListener("input", calculate());
+  // calculate();
+}
+
+function getKeys(keys, select){
+  keys.sort();
+  keys.forEach(key => {
+    const option = document.createElement("option");
+    option.setAttribute("value", key);
+    option.setAttribute("text", key);
+    option.textContent = key;
+    select.add(option);
+  });
+}
+
+function loadCurrencies(data){
+  const keys = Object.keys(data);
+  getKeys(keys, convertFrom);
+  getKeys(keys, convertTo);
+}
+
+function checkResponseAndParse(response){
+  if(!response.ok) throw new Error(response.status);
+  return response.json();
+}
+
+function currencies(){
+  fetch("https://api.vatcomply.com/currencies")
+    .then(checkResponseAndParse)
+    .then((data) => {
+      loadCurrencies(data);
+      document.querySelector(".from-currency").addEventListener("input", calculate);
+    })
+    .catch((err) => {
+      return err;
+    });
+}
+
+function calculate(){
+  let select = document.querySelector(".from-currency");
+  let value = select.options[select.selectedIndex].value;
+  console.log(value);
+
+  // select.map((option) => {
+    // console.log(option.value);
+  // });
+
+  // let value = select.options[select.selectedIndex].value;
+  // console.log(value);
+  // let fromSelectedText = convertFrom.options[convertFrom.selectedIndex].textContent;
+  // console.log(fromSelectedText);
+
+
+
+  // if(fromSelectedText === "EUR"){
+    // fetch(`https://api.vatcomply.com/rates?base=${fromSelectedText}`)
+    //   .then(CurrencyConverter.checkResponseAndParse)
+    //   .then((data) => {
+    //     console.log(data);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+  // }
+  // console.log(fromSelectedText);
+
+  // let toSelectOption = document.querySelector("#to-currency");
+  // console.dir(fromSelectOption);
+  
+  // fetch("https://api.vatcomply.com/currencies")
+  // .then(CurrencyConverter.checkResponseAndParse)
+  // .then((data) => {
+  //   console.log(data);
+  // })
+  // .catch((err) => {
+  //   console.log(err);
+  // });
+}
+
+
+function updateOutput(e){
+  output.innerText = e.target.value;
+  result.innerText = e.target.value;
+}
+
+
+// }
+
+
+window.addEventListener("DOMContentLoaded", currencies());
+constr();
+// calculate();
+
+// new CurrencyConverter();

@@ -55,12 +55,20 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 select{
-  background: rgb(198, 214, 231);
+  background: rgb(255, 255, 255);
   color: black;
+  overflow: visible;
+  margin-bottom: 0;
 }
 .results-container{
   flex-direction: row;
   align-items: center;
+}
+option{
+  /* height: 100vh; */
+  /* overflow: visible; */
+  display: block;
+  width: 40px;
 }
 
 .results-container-1, .results-container-3{
