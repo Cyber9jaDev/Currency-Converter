@@ -83,9 +83,6 @@ option{
   word-wrap: break-word;
   word-break: break-all;
 }
-.information{
-  background-color: rgb(178, 208, 226);
-}
 
 .exchange-span-1, .exchange-span-2{
   flex-basis: 40%;
@@ -97,9 +94,7 @@ option{
 /* MEDIA QUERIES */
 
 @media only screen and (max-width: 700px) {
-  /* body {
-    background-color: lightblue;
-  } */
+
   .form-row{
     flex-direction: column;
     width: 100%;

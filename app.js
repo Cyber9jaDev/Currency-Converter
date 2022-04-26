@@ -5,13 +5,18 @@ let output = document.getElementById("output");
 let result = document.getElementById("result");
 const showOutputCurrency = document.querySelector(".output-cur");
 const showResultCurrency = document.querySelector(".cur-result");
+const exchangeInformation = document.getElementById("exchange-information");
+
 
 
 class Converter {
   constructor(){
-    window.addEventListener("DOMContentLoaded", this.showCurrencyInformation());
+    window.addEventListener("DOMContentLoaded", Converter.showCurrencyInformation);
+    window.addEventListener("DOMContentLoaded", Converter.showExchangeInformation);
     window.addEventListener("DOMContentLoaded", Converter.currencies);
     // Converter.test();
+    Converter.showCurrencyInformation();
+    // this.showExchangeInformation();
   }
 
   static getKeys(keys, select){
@@ -50,8 +55,9 @@ class Converter {
       });
   }
   
-  static rateConverter(rates, fromSelectValue){
-    let toSelectValue = convertToField.options[convertToField.selectedIndex].value;
+  static rateConverter(rates, fromSelectValue, toSelectValue){
+    // let fromCurrencyCode, toCurrencyCode, fromCurrencySymbol, toCurrencySymbol;
+    
     const amountValue = 0 || amount.value;
     if(toSelectValue === "RUB") return;
     const rateMultiplier = rates[toSelectValue];
@@ -60,21 +66,81 @@ class Converter {
     output.textContent = amount.value;
     showOutputCurrency.innerText = fromSelectValue;
     showResultCurrency.innerText = toSelectValue;
+
+    fetch("https://api.vatcomply.com/currencies")
+      .then(Converter.checkResponseAndParse)
+      .then((data) => {
+        // console.log(data);
+        fromCurrencyCode =  data.fromSelectValue.name;
+        // console.log("fromCurrencyCode", fromCurrencyCode);
+        fromCurrencySymbol = data.fromSelectValue.symbol;
+        // console.log("fromCurrencySymbol", fromCurrencySymbol);
+      })
+      .catch((err) => {
+        return err;
+    });
+
+    fetch("https://api.vatcomply.com/currencies")
+      .then(Converter.checkResponseAndParse)
+      .then((data) => {
+        // console.log(data);
+        toCurrencyCode = data.toSelectValue.name;
+        // console.log("toCurrencyCode", toCurrencyCode);
+        toCurrencySymbol = data.toSelectValue.symbol;
+        // console.log("toCurrencySymbol", toCurrencySymbol);
+      })
+      .catch((err) => {
+        return err;
+    });
+
+
+    // Converter.showExchangeInformation(fromSelectValue, toSelectValue, fromCurrencyCode, toCurrencyCode, fromCurrencySymbol, toCurrencySymbol);
   }
 
   static calculate(){
+    let toSelectValue = convertToField.options[convertToField.selectedIndex].text;
     let fromSelectValue = convertFromField.options[convertFromField.selectedIndex].text;
     fetch(`https://api.vatcomply.com/rates?base=${fromSelectValue}`)
       .then(Converter.checkResponseAndParse)
       .then(({rates}) => {
-        Converter.rateConverter(rates, fromSelectValue);
+        Converter.rateConverter(rates, fromSelectValue, toSelectValue);
       })
       .catch((err) => {
         return err;
-      });
+    });   // Fetch object ends here
+
+
+    let fromCurrencyName, toCurrencyName, fromCurrencySymbol, toCurrencySymbol;
+
+    fetch("https://api.vatcomply.com/currencies")
+      .then(Converter.checkResponseAndParse)
+      .then((data) => {
+        document.querySelector(".currency-1").innerText = fromSelectValue;
+        fromCurrencyName = data[fromSelectValue].name;
+        document.querySelector(".iso-code-1").innerText = fromCurrencyName;
+        fromCurrencySymbol = data[fromSelectValue].symbol;
+        document.querySelector(".symbol-1").innerText = fromCurrencySymbol;
+      })
+      .catch((err) => {
+        return err;
+    });
+
+    fetch("https://api.vatcomply.com/currencies")
+      .then(Converter.checkResponseAndParse)
+      .then((data) => {
+        document.querySelector(".currency-2").innerText = toSelectValue;
+        toCurrencyName = data[toSelectValue].name;
+        document.querySelector(".iso-code-2").innerText = toCurrencyName;
+        toCurrencySymbol = data[toSelectValue].symbol;
+        document.querySelector(".symbol-2").innerText = toCurrencySymbol;
+      })
+      .catch((err) => {
+        return err;
+    });
+
   }
 
-  showCurrencyInformation(){
+  static showCurrencyInformation(){
     let information = document.getElementById("information");
     information.innerHTML = `
       <div class="container-lg">
@@ -115,20 +181,53 @@ class Converter {
 
   }
 
-  showExchangeInfoemation(){
-    
+  static exchangeHTML(fromCurrency = "AUD", toCurrency = "AUD", fromCurrencyCode = "Australian Dollar", toCurrencyCode ="Australian Dollar", fromCurrencySymbol = "A$", toCurrencySymbol ="A$"){
+    return `
+      <div class="currency-information container-lg m-auto d-flex justify-content-center flex-column">
+        <div class="row d-flex justify-content-around">
+          <div class="col-md-4">
+            <h4 class="text-light text-opacity-75 lead fs-3 mt-3">From Currency</h4>
+            <div class="d-flex flex-column">
+              <div class="d-flex flex-row">
+                <span class="exchange-span-1">Currency</span>
+                <span class="currency currency-1 exchange-span-2">${fromCurrency = "AUD"}</span>
+              </div>
+              <div class="d-flex flex-row">
+                <span class="exchange-span-1">ISO Code</span>
+                <span class="iso-code exchange-span-2 iso-code-1">${fromCurrencyCode}</span>
+              </div>
+              <div class="d-flex flex-row">
+                <span class="exchange-span-1">Symbol</span>
+                <span class="symbol symbol-1 exchange-span-2">${fromCurrencySymbol}</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <h4 class="text-light text-opacity-75 lead fs-3 mt-3">To Currency</h4>
+            <div class="d-flex flex-column">
+              <div class="d-flex flex-row">
+                <span class="exchange-span-1">Currency</span>
+                <span class="currency currency-2 exchange-span-2">${toCurrency}</span>
+              </div>
+              <div class="d-flex flex-row">
+                <span class="exchange-span-1">ISO Code</span>
+                <span class="iso-code iso-code-2 exchange-span-2">${toCurrencyCode}</span>
+              </div>
+              <div class="d-flex flex-row">
+                <span class="exchange-span-1">Symbol</span>
+                <span class="symbol symbol-2 exchange-span-2">${toCurrencySymbol}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
   }
 
-  static test(){
-    fetch("https://api.vatcomply.com/geolocate")
-      .then(Converter.checkResponseAndParse)
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  static showExchangeInformation(){
+   exchangeInformation.innerHTML = Converter.exchangeHTML();
   }
+
     
 }
 
