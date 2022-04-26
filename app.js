@@ -1,14 +1,15 @@
 let convertFromField = document.querySelector("#from-currency");
 let convertToField = document.querySelector("#to-currency");
-const amount = document.getElementById("amount");
-const output = document.getElementById("output");
-const result = document.getElementById("result");
+let amount = document.getElementById("amount");
+let output = document.getElementById("output");
+let result = document.getElementById("result");
+const showOutputCurrency = document.querySelector(".output-cur");
+const showResultCurrency = document.querySelector(".cur-result");
 
 
 class Converter {
   constructor(){
     window.addEventListener("DOMContentLoaded", Converter.currencies);
-    // this.hh();
   }
 
   static getKeys(keys, select){
@@ -40,44 +41,37 @@ class Converter {
         Converter.loadCurrencies(data);
         convertFromField.addEventListener("input", Converter.calculate);
         convertToField.addEventListener("input", Converter.calculate);
+        amount.addEventListener("input", Converter.calculate);
       })
       .catch((err) => {
         return err;
       });
   }
   
-  hh(){
-    fetch(`https://api.vatcomply.com/rates?base=USD`)
-    .then(Converter.checkResponseAndParse)
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((err) => {
-        return err;
-      });
-  }
-  static calculate(){
-    let fromSelectValue = convertFromField.options[convertFromField.selectedIndex].value;
+  static rateConverter(rates, fromSelectValue){
     let toSelectValue = convertToField.options[convertToField.selectedIndex].value;
-    
+    const amountValue = 0 || amount.value;
+    if(toSelectValue === "RUB") return;
+    const rateMultiplier = rates[toSelectValue];
+    const total = rateMultiplier * amountValue;
+    result.innerText = total;
+    output.textContent = amount.value;
+    showOutputCurrency.innerText = fromSelectValue;
+    showResultCurrency.innerText = toSelectValue;
+  }
+
+  static calculate(){
+    let fromSelectValue = convertFromField.options[convertFromField.selectedIndex].text;
     fetch(`https://api.vatcomply.com/rates?base=${fromSelectValue}`)
       .then(Converter.checkResponseAndParse)
       .then(({rates}) => {
-        console.log(rates);
+        Converter.rateConverter(rates, fromSelectValue);
       })
-      
       .catch((err) => {
         return err;
       });
-
   }
-  
-  
-  updateOutput(e){
-    output.innerText = e.target.value;
-    result.innerText = e.target.value;
-  }
-  
+    
 }
 
 

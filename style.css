@@ -2,6 +2,8 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}.header{
+  color: lightskyblue;
 }
 .form-row{
   display: flex;
@@ -97,6 +99,23 @@ option{
   .results-container{
     justify-content: flex-start;
     align-items: flex-start;
-    flex-direction: column;
+    /* flex-direction: column; */
+  }
+  p, h4{
+    font-size: 0.85rem;
+    text-align: justify;
+  }
+  option, select, label, input{
+    font-size: 0.85rem;
+  }
+  .results-container span, .results-container div{
+    font-size: 0.9rem
+  }
+  input, select, .arrow{
+    height: 32px;
+  }
+  .results-container{
+    flex-direction: row;
+    align-items: center;
   }
 }
