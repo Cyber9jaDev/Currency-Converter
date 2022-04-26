@@ -2,7 +2,11 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-}.header{
+}
+.container-fluid, .container{
+  overflow: hidden;
+}
+.header{
   color: lightskyblue;
 }
 .form-row{
@@ -52,6 +56,10 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+p, h4{
+  text-align: justify;
+}
+
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
@@ -67,8 +75,6 @@ select{
   align-items: center;
 }
 option{
-  /* height: 100vh; */
-  /* overflow: visible; */
   display: block;
   width: 40px;
 }
@@ -77,6 +83,17 @@ option{
   word-wrap: break-word;
   word-break: break-all;
 }
+.information{
+  background-color: rgb(178, 208, 226);
+}
+
+.exchange-span-1, .exchange-span-2{
+  flex-basis: 40%;
+}
+.exchange-span-2{
+  justify-content: flex-end;
+}
+
 /* MEDIA QUERIES */
 
 @media only screen and (max-width: 700px) {
@@ -117,5 +134,8 @@ option{
   .results-container{
     flex-direction: row;
     align-items: center;
+  }
+  .header{
+    font-size: 1.3rem;
   }
 }
