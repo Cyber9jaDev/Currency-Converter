@@ -13,6 +13,7 @@ class Exchange{
   constructor(){
     window.addEventListener("DOMContentLoaded", Exchange.showCurrencyInformation);
     window.addEventListener("DOMContentLoaded", Exchange.showExchangeInformation);
+    window.addEventListener("DOMContentLoaded", Exchange.loadDatesAndRates);
     window.addEventListener("DOMContentLoaded", Exchange.currencies);
     // Conv.test();
     // Conv.showCurrencyInformation();
@@ -136,16 +137,18 @@ class Exchange{
     const date = Exchange.currentDate();
     fetch(`https://api.vatcomply.com/rates?base=AUD&date=${date}`)
       .then(Exchange.checkResponseAndParse)
-      .then((data) => {
-        const dates = document.querySelectorAll(".date");
-        const previousDates = Exchange.previousDates();
-        for(let i =0; i < 7; i++){
-          dates[i].innerText = previousDates[i];
-        }
-      })
+      .then(Exchange.loadDatesAndRates)
       .catch((err) => {
         return err;
     });
+  }
+
+  static loadDatesAndRates(){
+    const dates = document.querySelectorAll(".date");
+    const previousDates = Exchange.previousDates();
+    for(let i =0; i < 7; i++){
+      dates[i].innerText = previousDates[i];
+    }
   }
 
   static showCurrencyInformation(){
