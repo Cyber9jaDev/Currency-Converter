@@ -90,6 +90,10 @@ option{
 .exchange-span-2{
   justify-content: flex-end;
 }
+.currency-information h4{
+  border-bottom: 4px solid rgb(201, 194, 194);
+}
+
 
 /* MEDIA QUERIES */
 

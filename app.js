@@ -14,8 +14,9 @@ class Converter {
     window.addEventListener("DOMContentLoaded", Converter.showCurrencyInformation);
     window.addEventListener("DOMContentLoaded", Converter.showExchangeInformation);
     window.addEventListener("DOMContentLoaded", Converter.currencies);
+    this.dates();
     // Converter.test();
-    Converter.showCurrencyInformation();
+    // Converter.showCurrencyInformation();
     // this.showExchangeInformation();
   }
 
@@ -56,8 +57,6 @@ class Converter {
   }
   
   static rateConverter(rates, fromSelectValue, toSelectValue){
-    // let fromCurrencyCode, toCurrencyCode, fromCurrencySymbol, toCurrencySymbol;
-    
     const amountValue = 0 || amount.value;
     if(toSelectValue === "RUB") return;
     const rateMultiplier = rates[toSelectValue];
@@ -185,9 +184,9 @@ class Converter {
     return `
       <div class="currency-information container-lg m-auto d-flex justify-content-center flex-column">
         <div class="row d-flex justify-content-around">
-          <div class="col-md-4">
+          <div class="col-md-4 bg-secondary my-2 pb-3">
             <h4 class="text-light text-opacity-75 lead fs-3 mt-3">From Currency</h4>
-            <div class="d-flex flex-column">
+            <div class="d-flex flex-column px-3">
               <div class="d-flex flex-row">
                 <span class="exchange-span-1">Currency</span>
                 <span class="currency currency-1 exchange-span-2">${fromCurrency}</span>
@@ -202,12 +201,32 @@ class Converter {
               </div>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4 bg-secondary my-2 pb-3">
             <h4 class="text-light text-opacity-75 lead fs-3 mt-3">To Currency</h4>
-            <div class="d-flex flex-column">
+            <div class="d-flex flex-column px-3">
               <div class="d-flex flex-row">
                 <span class="exchange-span-1">Currency</span>
                 <span class="currency currency-2 exchange-span-2">${toCurrency}</span>
+              </div>
+              <div class="d-flex flex-row">
+                <span class="exchange-span-1">ISO Code</span>
+                <span class="iso-code iso-code-2 exchange-span-2">${toCurrencyCode}</span>
+              </div>
+              <div class="d-flex flex-row">
+                <span class="exchange-span-1">Symbol</span>
+                <span class="symbol symbol-2 exchange-span-2">${toCurrencySymbol}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Current Rate and the last seven days -->
+
+          <div class="col-md-4 bg-secondary my-2 pb-3">
+            <h4 class="text-light text-opacity-75 lead fs-3 mt-3">Latest Exchange Rates</h4>
+            <div class="d-flex flex-column px-3">
+              <div class="d-flex flex-row">
+                <span class="exchange-span-1 today">Today</span>
+                <span class="currency currency-2 exchange-span-2">1</span>
               </div>
               <div class="d-flex flex-row">
                 <span class="exchange-span-1">ISO Code</span>
@@ -228,6 +247,16 @@ class Converter {
    exchangeInformation.innerHTML = Converter.exchangeHTML();
   }
 
+  dates(){
+    fetch("https://api.vatcomply.com/rates?base=AUD&date=2000-04-05")
+      .then(Converter.checkResponseAndParse)
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        return err;
+      });
+  }
     
 }
 
