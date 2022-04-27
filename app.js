@@ -17,7 +17,8 @@ class Exchange{
     // Conv.test();
     // Conv.showCurrencyInformation();
     // this.showExchangeInformation();
-    this.rates();
+    // console.log(this.rates());
+    // console.log(this.dates());
   }
 
   static getKeys(keys, select){
@@ -131,20 +132,16 @@ class Exchange{
         return err;
     });
 
-    const getDate = Exchange.date();
-    const {year, month, date} = getDate;
-    const d = `${year}-${month}-${date}`;
-
-    fetch(`https://api.vatcomply.com/rates?base=AUD&date=${d}`)
+    // Get the current Date
+    const date = Exchange.currentDate();
+    fetch(`https://api.vatcomply.com/rates?base=AUD&date=${date}`)
       .then(Exchange.checkResponseAndParse)
       .then((data) => {
-        document.querySelector(".today").innerText = d;
         const dates = document.querySelectorAll(".date");
-        for(let i =0; i < 6; i++){
-          dates[i].innerText = d;
-          console.log(dates[i]);
+        const previousDates = Exchange.previousDates();
+        for(let i =0; i < 7; i++){
+          dates[i].innerText = previousDates[i];
         }
-        console.log(dates);
       })
       .catch((err) => {
         return err;
@@ -228,6 +225,10 @@ class Exchange{
                 <span class="exchange-span-1">Symbol</span>
                 <span class="symbol symbol-2 exchange-span-2">${toCurrencySymbol}</span>
               </div>
+              <div class="d-flex flex-row">
+                <span class="exchange-span-1">Symbol</span>
+                <span class="symbol symbol-2 exchange-span-2">${toCurrencySymbol}</span>
+              </div>
             </div>
           </div>
 
@@ -237,32 +238,32 @@ class Exchange{
             <h4 class="text-light text-opacity-75 lead fs-3 mt-3">Latest Exchange Rates</h4>
             <div class="d-flex flex-column px-3">
               <div class="d-flex flex-row">
-                <span class="exchange-span-1 today"></span>
-                <span class="exchange-span-2 rate text-end">0.13232</span>
+                <span class="exchange-span-1 date"></span>
+                <span class="exchange-span-2 rate text-end"></span>
               </div>
               <div class="d-flex flex-row">
-                <span class="exchange-span-1 date">Yesterday</span>
-                <span class="exchange-span-2 rate text-end">0.000002</span>
+                <span class="exchange-span-1 date"></span>
+                <span class="exchange-span-2 rate text-end"</span>
               </div>
               <div class="d-flex flex-row">
-                <span class="exchange-span-1 date">Yesterday</span>
-                <span class="exchange-span-2 rate text-end">0.000002</span>
+                <span class="exchange-span-1 date"></span>
+                <span class="exchange-span-2 rate text-end"></span>
               </div>
               <div class="d-flex flex-row">
-                <span class="exchange-span-1 date">Yesterday</span>
-                <span class="exchange-span-2 rate text-end">0.000002</span>
+                <span class="exchange-span-1 date"></span>
+                <span class="exchange-span-2 rate text-end"></span>
               </div>
               <div class="d-flex flex-row">
-                <span class="exchange-span-1 date">Yesterday</span>
-                <span class="exchange-span-2 rate text-end">0.000003</span>
+                <span class="exchange-span-1 date"></span>
+                <span class="exchange-span-2 rate text-end"></span>
               </div>
               <div class="d-flex flex-row">
-                <span class="exchange-span-1 date">Yesterday</span>
-                <span class="exchange-span-2 rate text-end">0.000003</span>
+                <span class="exchange-span-1 date"></span>
+                <span class="exchange-span-2 rate text-end"></span>
               </div>
               <div class="d-flex flex-row">
-                <span class="exchange-span-1 date">Yesterday</span>
-                <span class="exchange-span-2 rate text-end">0.000003</span>
+                <span class="exchange-span-1 date"></span>
+                <span class="exchange-span-2 rate text-end"></span>
               </div>
             </div>
           </div>
@@ -275,22 +276,26 @@ class Exchange{
    exchangeInformation.innerHTML = Exchange.exchangeHTML();
   }
 
-  static date(){
+  static currentDate(){
     const d = new Date();
     let date = d.getDate(); // Returns Wednesday
     let month = d.getMonth();
     const year = d.getFullYear();
     if(month < 10){ month = "0" + month;}
     if(date < 10) date = "0" + date;
-    return {
-      year, month, date
-    };
+    return`${year}-${month}-${date}`;
   }
 
   // Rates per day
-  rates(){
-    const d = new Date();
-    console.log(d.setDate(15));
+  static previousDates(){
+    let dates = [];
+    for(let i = 0; i < 7; i++){
+      const d = new Date();
+      const milliseconds = d.setDate(d.getDate() - i);
+      const date = new Date(milliseconds).toLocaleDateString();
+      dates.push(date);
+    }
+    return dates;
   }
     
 }
