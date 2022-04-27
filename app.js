@@ -9,15 +9,15 @@ const exchangeInformation = document.getElementById("exchange-information");
 
 
 
-class Converter {
+class Exchange{
   constructor(){
-    window.addEventListener("DOMContentLoaded", Converter.showCurrencyInformation);
-    window.addEventListener("DOMContentLoaded", Converter.showExchangeInformation);
-    window.addEventListener("DOMContentLoaded", Converter.currencies);
-    this.dates();
-    // Converter.test();
-    // Converter.showCurrencyInformation();
+    window.addEventListener("DOMContentLoaded", Exchange.showCurrencyInformation);
+    window.addEventListener("DOMContentLoaded", Exchange.showExchangeInformation);
+    window.addEventListener("DOMContentLoaded", Exchange.currencies);
+    // Conv.test();
+    // Conv.showCurrencyInformation();
     // this.showExchangeInformation();
+    this.rates();
   }
 
   static getKeys(keys, select){
@@ -33,8 +33,8 @@ class Converter {
   
   static loadCurrencies(data){
     const keys = Object.keys(data);
-    Converter.getKeys(keys, convertFromField);
-    Converter.getKeys(keys, convertToField);
+    Exchange.getKeys(keys, convertFromField);
+    Exchange.getKeys(keys, convertToField);
   }
   
   static checkResponseAndParse(response){
@@ -44,12 +44,12 @@ class Converter {
   
   static currencies(){
     fetch("https://api.vatcomply.com/currencies")
-      .then(Converter.checkResponseAndParse)
+      .then(Exchange.checkResponseAndParse)
       .then((data) => {
-        Converter.loadCurrencies(data);
-        convertFromField.addEventListener("input", Converter.calculate);
-        convertToField.addEventListener("input", Converter.calculate);
-        amount.addEventListener("input", Converter.calculate);
+        Exchange.loadCurrencies(data);
+        convertFromField.addEventListener("input", Exchange.calculate);
+        convertToField.addEventListener("input", Exchange.calculate);
+        amount.addEventListener("input", Exchange.calculate);
       })
       .catch((err) => {
         return err;
@@ -67,7 +67,7 @@ class Converter {
     showResultCurrency.innerText = toSelectValue;
 
     fetch("https://api.vatcomply.com/currencies")
-      .then(Converter.checkResponseAndParse)
+      .then(Exchange.checkResponseAndParse)
       .then((data) => {
         // console.log(data);
         fromCurrencyCode =  data.fromSelectValue.name;
@@ -80,29 +80,23 @@ class Converter {
     });
 
     fetch("https://api.vatcomply.com/currencies")
-      .then(Converter.checkResponseAndParse)
+      .then(Exchange.checkResponseAndParse)
       .then((data) => {
-        // console.log(data);
         toCurrencyCode = data.toSelectValue.name;
-        // console.log("toCurrencyCode", toCurrencyCode);
         toCurrencySymbol = data.toSelectValue.symbol;
-        // console.log("toCurrencySymbol", toCurrencySymbol);
       })
       .catch((err) => {
         return err;
     });
-
-
-    // Converter.showExchangeInformation(fromSelectValue, toSelectValue, fromCurrencyCode, toCurrencyCode, fromCurrencySymbol, toCurrencySymbol);
   }
 
   static calculate(){
     let toSelectValue = convertToField.options[convertToField.selectedIndex].text;
     let fromSelectValue = convertFromField.options[convertFromField.selectedIndex].text;
     fetch(`https://api.vatcomply.com/rates?base=${fromSelectValue}`)
-      .then(Converter.checkResponseAndParse)
+      .then(Exchange.checkResponseAndParse)
       .then(({rates}) => {
-        Converter.rateConverter(rates, fromSelectValue, toSelectValue);
+        Exchange.rateConverter(rates, fromSelectValue, toSelectValue);
       })
       .catch((err) => {
         return err;
@@ -112,7 +106,7 @@ class Converter {
     let fromCurrencyName, toCurrencyName, fromCurrencySymbol, toCurrencySymbol;
 
     fetch("https://api.vatcomply.com/currencies")
-      .then(Converter.checkResponseAndParse)
+      .then(Exchange.checkResponseAndParse)
       .then((data) => {
         document.querySelector(".currency-1").innerText = fromSelectValue;
         fromCurrencyName = data[fromSelectValue].name;
@@ -125,7 +119,7 @@ class Converter {
     });
 
     fetch("https://api.vatcomply.com/currencies")
-      .then(Converter.checkResponseAndParse)
+      .then(Exchange.checkResponseAndParse)
       .then((data) => {
         document.querySelector(".currency-2").innerText = toSelectValue;
         toCurrencyName = data[toSelectValue].name;
@@ -137,13 +131,31 @@ class Converter {
         return err;
     });
 
+    const getDate = Exchange.date();
+    const {year, month, date} = getDate;
+    const d = `${year}-${month}-${date}`;
+
+    fetch(`https://api.vatcomply.com/rates?base=AUD&date=${d}`)
+      .then(Exchange.checkResponseAndParse)
+      .then((data) => {
+        document.querySelector(".today").innerText = d;
+        const dates = document.querySelectorAll(".date");
+        for(let i =0; i < 6; i++){
+          dates[i].innerText = d;
+          console.log(dates[i]);
+        }
+        console.log(dates);
+      })
+      .catch((err) => {
+        return err;
+    });
   }
 
   static showCurrencyInformation(){
     let information = document.getElementById("information");
     information.innerHTML = `
       <div class="container-lg">
-      <h4 class="text-black lead fs-3 mt-3">Our Currency Converter</h4>
+      <h4 class="text-black lead fs-3 mt-3">Our Currency Conv</h4>
       <p class="">
         With our unique currency converter you can easily and quickly
         convert currencies with many advantages: All foreign currencies
@@ -225,16 +237,32 @@ class Converter {
             <h4 class="text-light text-opacity-75 lead fs-3 mt-3">Latest Exchange Rates</h4>
             <div class="d-flex flex-column px-3">
               <div class="d-flex flex-row">
-                <span class="exchange-span-1 today">Today</span>
-                <span class="currency currency-2 exchange-span-2">1</span>
+                <span class="exchange-span-1 today"></span>
+                <span class="exchange-span-2 rate text-end">0.13232</span>
               </div>
               <div class="d-flex flex-row">
-                <span class="exchange-span-1">ISO Code</span>
-                <span class="iso-code iso-code-2 exchange-span-2">${toCurrencyCode}</span>
+                <span class="exchange-span-1 date">Yesterday</span>
+                <span class="exchange-span-2 rate text-end">0.000002</span>
               </div>
               <div class="d-flex flex-row">
-                <span class="exchange-span-1">Symbol</span>
-                <span class="symbol symbol-2 exchange-span-2">${toCurrencySymbol}</span>
+                <span class="exchange-span-1 date">Yesterday</span>
+                <span class="exchange-span-2 rate text-end">0.000002</span>
+              </div>
+              <div class="d-flex flex-row">
+                <span class="exchange-span-1 date">Yesterday</span>
+                <span class="exchange-span-2 rate text-end">0.000002</span>
+              </div>
+              <div class="d-flex flex-row">
+                <span class="exchange-span-1 date">Yesterday</span>
+                <span class="exchange-span-2 rate text-end">0.000003</span>
+              </div>
+              <div class="d-flex flex-row">
+                <span class="exchange-span-1 date">Yesterday</span>
+                <span class="exchange-span-2 rate text-end">0.000003</span>
+              </div>
+              <div class="d-flex flex-row">
+                <span class="exchange-span-1 date">Yesterday</span>
+                <span class="exchange-span-2 rate text-end">0.000003</span>
               </div>
             </div>
           </div>
@@ -244,20 +272,27 @@ class Converter {
   }
 
   static showExchangeInformation(){
-   exchangeInformation.innerHTML = Converter.exchangeHTML();
+   exchangeInformation.innerHTML = Exchange.exchangeHTML();
   }
 
-  dates(){
-    fetch("https://api.vatcomply.com/rates?base=AUD&date=2000-04-05")
-      .then(Converter.checkResponseAndParse)
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((err) => {
-        return err;
-      });
+  static date(){
+    const d = new Date();
+    let date = d.getDate(); // Returns Wednesday
+    let month = d.getMonth();
+    const year = d.getFullYear();
+    if(month < 10){ month = "0" + month;}
+    if(date < 10) date = "0" + date;
+    return {
+      year, month, date
+    };
+  }
+
+  // Rates per day
+  rates(){
+    const d = new Date();
+    console.log(d.setDate(15));
   }
     
 }
 
-new Converter();
+new Exchange();
