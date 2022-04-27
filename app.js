@@ -13,13 +13,8 @@ class Exchange{
   constructor(){
     window.addEventListener("DOMContentLoaded", Exchange.showCurrencyInformation);
     window.addEventListener("DOMContentLoaded", Exchange.showExchangeInformation);
-    window.addEventListener("DOMContentLoaded", Exchange.loadDatesAndRates);
+    window.addEventListener("DOMContentLoaded", Exchange.loadInitialDatesAndRates);
     window.addEventListener("DOMContentLoaded", Exchange.currencies);
-    // Conv.test();
-    // Conv.showCurrencyInformation();
-    // this.showExchangeInformation();
-    // console.log(this.rates());
-    // console.log(this.dates());
   }
 
   static getKeys(keys, select){
@@ -91,6 +86,15 @@ class Exchange{
         return err;
     });
   }
+  static loadInitialDatesAndRates(){
+    const dates = document.querySelectorAll(".date");
+    const rates = document.querySelectorAll(".rate");
+    const previousDates = Exchange.previousDates();
+    for(let i =0; i < 7; i++){
+      dates[i].innerText = previousDates[i];
+      rates[i].innerText = 1;
+    }
+  }
 
   static calculate(){
     let toSelectValue = convertToField.options[convertToField.selectedIndex].text;
@@ -138,6 +142,14 @@ class Exchange{
     fetch(`https://api.vatcomply.com/rates?base=AUD&date=${date}`)
       .then(Exchange.checkResponseAndParse)
       .then(Exchange.loadDatesAndRates)
+      .then(()=> {
+        fetch()
+        .then((result) => {
+          
+        }).catch((err) => {
+          
+        });
+      })
       .catch((err) => {
         return err;
     });
@@ -145,10 +157,22 @@ class Exchange{
 
   static loadDatesAndRates(){
     const dates = document.querySelectorAll(".date");
+    const rates = document.querySelectorAll(".rate");
     const previousDates = Exchange.previousDates();
-    for(let i =0; i < 7; i++){
-      dates[i].innerText = previousDates[i];
-    }
+    
+    let toSelectValue = convertToField.options[convertToField.selectedIndex].text; 
+    let fromSelectValue = convertFromField.options[convertFromField.selectedIndex].text;
+    previousDates.forEach((date, index) => {
+      fetch(`https://api.vatcomply.com/rates?base=${fromSelectValue}&date=${date}`)
+        .then(Exchange.checkResponseAndParse)
+        .then((data) => {
+          rates[index].innerText = data.rates[toSelectValue];
+          dates[i].innerText = previousDates[i];
+        })
+        .catch((err) => {
+          
+        });
+    });
   }
 
   static showCurrencyInformation(){
@@ -289,14 +313,18 @@ class Exchange{
     return`${year}-${month}-${date}`;
   }
 
-  // Rates per day
   static previousDates(){
     let dates = [];
     for(let i = 0; i < 7; i++){
       const d = new Date();
       const milliseconds = d.setDate(d.getDate() - i);
-      const date = new Date(milliseconds).toLocaleDateString();
-      dates.push(date);
+      let date = new Date(milliseconds).getDate();
+      let month = new Date(milliseconds).getMonth();
+      if(date < 10) date = "0" + date;
+      if(month < 10) month = "0" + month;
+      const year = new Date(milliseconds).getFullYear();
+      const completeDate = `${year}-${month}-${date}`;
+      dates.push(completeDate);
     }
     return dates;
   }
