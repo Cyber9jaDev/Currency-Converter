@@ -190,7 +190,7 @@ class Converter {
             <div class="d-flex flex-column">
               <div class="d-flex flex-row">
                 <span class="exchange-span-1">Currency</span>
-                <span class="currency currency-1 exchange-span-2">${fromCurrency = "AUD"}</span>
+                <span class="currency currency-1 exchange-span-2">${fromCurrency}</span>
               </div>
               <div class="d-flex flex-row">
                 <span class="exchange-span-1">ISO Code</span>
@@ -230,6 +230,5 @@ class Converter {
 
     
 }
-
 
 new Converter();
