@@ -128,13 +128,13 @@ option{
     font-size: 0.9rem
   }
   input, select, .arrow{
-    height: 32px;
+    height: 35px;
   }
   .results-container{
     flex-direction: row;
     align-items: center;
   }
   .header{
-    font-size: 1.3rem;
+    font-size: 1.5rem;
   }
 }
