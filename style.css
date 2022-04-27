@@ -7,7 +7,7 @@
   overflow: hidden;
 }
 .header{
-  color: lightskyblue;
+  color: lightseagreen;
 }
 .form-row{
   display: flex;
@@ -30,7 +30,7 @@
   display: flex;
   color: white;
   width: 80%;
-  background-color: lightskyblue;
+  background-color: lightseagreen;
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -92,6 +92,9 @@ option{
 }
 .currency-information h4{
   border-bottom: 4px solid rgb(201, 194, 194);
+}
+.information{
+  background: rgb(191, 235, 232);
 }
 
 

@@ -155,6 +155,7 @@ class Exchange{
     });
   }
 
+
   static loadDatesAndRates(){
     const dates = document.querySelectorAll(".date");
     const rates = document.querySelectorAll(".rate");
@@ -179,7 +180,7 @@ class Exchange{
     let information = document.getElementById("information");
     information.innerHTML = `
       <div class="container-lg">
-      <h4 class="text-black lead fs-3 mt-3">Our Currency Conv</h4>
+      <h4 class="text-black lead fs-3 mt-3">Our Currency Converter</h4>
       <p class="">
         With our unique currency converter you can easily and quickly
         convert currencies with many advantages: All foreign currencies
