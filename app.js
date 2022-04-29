@@ -12,7 +12,7 @@ const exchangeInformation = document.getElementById("exchange-information");
 class Exchange{
   constructor(){
     window.addEventListener("DOMContentLoaded", Exchange.showCurrencyInformation);
-    window.addEventListener("DOMContentLoaded", this.cheatsheet);
+    window.addEventListener("DOMContentLoaded", Exchange.initialCheatsheet);
     window.addEventListener("DOMContentLoaded", Exchange.showExchangeInformation);
     window.addEventListener("DOMContentLoaded", Exchange.loadInitialDatesAndRates);
     window.addEventListener("DOMContentLoaded", Exchange.currencies);
@@ -97,46 +97,41 @@ class Exchange{
     }
   }
 
+  static displayCurrencyCodeSymbol(data, fromSelectValue, fromCurrencyName, fromCurrencySymbol, toSelectValue, toCurrencyName, toCurrencySymbol){
+    document.querySelector(".currency-1").innerText = fromSelectValue;
+    fromCurrencyName = data[fromSelectValue].name;
+    document.querySelector(".iso-code-1").innerText = fromCurrencyName;
+    fromCurrencySymbol = data[fromSelectValue].symbol;
+    document.querySelector(".symbol-1").innerText = fromCurrencySymbol;
+
+    document.querySelector(".currency-2").innerText = toSelectValue;
+    toCurrencyName = data[toSelectValue].name;
+    document.querySelector(".iso-code-2").innerText = toCurrencyName;
+    toCurrencySymbol = data[toSelectValue].symbol;
+    document.querySelector(".symbol-2").innerText = toCurrencySymbol;
+
+    return fetch("https://api.vatcomply.com/currencies");
+  }
+
   static calculate(){
     let toSelectValue = convertToField.options[convertToField.selectedIndex].text;
     let fromSelectValue = convertFromField.options[convertFromField.selectedIndex].text;
+    let fromCurrencyName, toCurrencyName, fromCurrencySymbol, toCurrencySymbol;
+    
     fetch(`https://api.vatcomply.com/rates?base=${fromSelectValue}`)
       .then(Exchange.checkResponseAndParse)
       .then(({rates}) => {
         Exchange.rateConverter(rates, fromSelectValue, toSelectValue);
+        Exchange.cheatsheet(fromSelectValue, toSelectValue);
+        return fetch("https://api.vatcomply.com/currencies");
       })
+      .then(Exchange.checkResponseAndParse)
+      .then((data) => {Exchange.displayCurrencyCodeSymbol(data, fromSelectValue, fromCurrencyName, fromCurrencySymbol, toSelectValue, toCurrencyName, toCurrencySymbol); })
+      .then(Exchange.checkResponseAndParse)
       .catch((err) => {
         return err;
     });   // Fetch object ends here
 
-
-    let fromCurrencyName, toCurrencyName, fromCurrencySymbol, toCurrencySymbol;
-
-    fetch("https://api.vatcomply.com/currencies")
-      .then(Exchange.checkResponseAndParse)
-      .then((data) => {
-        document.querySelector(".currency-1").innerText = fromSelectValue;
-        fromCurrencyName = data[fromSelectValue].name;
-        document.querySelector(".iso-code-1").innerText = fromCurrencyName;
-        fromCurrencySymbol = data[fromSelectValue].symbol;
-        document.querySelector(".symbol-1").innerText = fromCurrencySymbol;
-      })
-      .catch((err) => {
-        return err;
-    });
-
-    fetch("https://api.vatcomply.com/currencies")
-      .then(Exchange.checkResponseAndParse)
-      .then((data) => {
-        document.querySelector(".currency-2").innerText = toSelectValue;
-        toCurrencyName = data[toSelectValue].name;
-        document.querySelector(".iso-code-2").innerText = toCurrencyName;
-        toCurrencySymbol = data[toSelectValue].symbol;
-        document.querySelector(".symbol-2").innerText = toCurrencySymbol;
-      })
-      .catch((err) => {
-        return err;
-    });
 
     // Get the current Date
     const date = Exchange.currentDate();
@@ -154,6 +149,13 @@ class Exchange{
       .catch((err) => {
         return err;
     });
+
+  }
+
+  static cheatsheet(fromCurrency, toCurrency){
+    const date = Exchange.currentDate();
+    const cheatsheet = document.querySelector(".traveller-cheatsheet");
+    cheatsheet.innerHTML = Exchange.cheatsheetHTML(date, fromCurrency, toCurrency);
   }
 
 
@@ -300,12 +302,12 @@ class Exchange{
    exchangeInformation.innerHTML = Exchange.exchangeHTML();
   }
 
-  static cheatsheetHTML(date){
+  static cheatsheetHTML(date, fromCurrency = "EUR" , toCurrency = "GBP"){
     return`
       <div class="container-lg d-sm-flex flex-column">
       <h4 class="cheatsheet-intro lead">Traveller Cheatsheet</h4>
       <div class="cheatsheet-header d-flex flex-row align-items-center w-100">
-        <div class="lead fw-bold cheatsheet-header-currency d-flex w-25"><strong><span class="from-cheatsheet">AUD</span> / <span class="to-cheatsheet">AUD</span></strong></div>
+        <div class="lead fw-bold cheatsheet-header-currency d-flex w-25"><strong><span class="from-cheatsheet">${fromCurrency}</span> / <span class="to-cheatsheet">${toCurrency}</span></strong></div>
         <div class="cheatsheet-header-info d-flex flex-column w-75 text-end">
           <div>Traveller Cheatsheet <br><small><a href="https://cyber9jaexchange.netlify.app">cyber9jaexchange.com</a></small></div>
           <div>Exchange rates from <span id="cheatsheet-date">${date}</span></div>
@@ -317,9 +319,9 @@ class Exchange{
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col" class="from-cheatsheet">AUD</th>
+                  <th scope="col" class="from-cheatsheet">${fromCurrency}</th>
                   <th scope="col"><i class="d-none opacity-100"></i></th>
-                  <th scope="col" class="to-cheatsheet">AUD</th>
+                  <th scope="col" class="to-cheatsheet">${toCurrency}</th>
                 </tr>
               </thead>
               <tbody>
@@ -360,9 +362,9 @@ class Exchange{
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col" class="from-cheatsheet">AUD</th>
+                  <th scope="col" class="from-cheatsheet">${fromCurrency}</th>
                   <th scope="col"><i class="d-none"></i></th>
-                  <th scope="col" class="to-cheatsheet">AUD</th>
+                  <th scope="col" class="to-cheatsheet">${toCurrency}</th>
                 </tr>
               </thead>
               <tbody>
@@ -403,9 +405,9 @@ class Exchange{
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col" class="from-cheatsheet">AUD</th>
+                  <th scope="col" class="from-cheatsheet">${fromCurrency}</th>
                   <th scope="col"><i class="d-none"></i></th>
-                  <th scope="col" class="to-cheatsheet">AUD</th>
+                  <th scope="col" class="to-cheatsheet">${toCurrency}</th>
                 </tr>
               </thead>
               <tbody>
@@ -448,9 +450,9 @@ class Exchange{
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col" class="to-cheatsheet">DUA</th>
+                  <th scope="col" class="to-cheatsheet">${fromCurrency}</th>
                   <th scope="col"><i class="d-none opacity-100"></i></th>
-                  <th scope="col" class=" from-cheatsheet">AUD</th>
+                  <th scope="col" class=" from-cheatsheet">${toCurrency}</th>
                 </tr>
               </thead>
               <tbody>
@@ -491,9 +493,9 @@ class Exchange{
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col" class="to-cheatsheet">DUA</th>
+                  <th scope="col" class="to-cheatsheet">${fromCurrency}</th>
                   <th scope="col"><i class="d-none"></i></th>
-                  <th scope="col" class="from-cheatsheet">AUD</th>
+                  <th scope="col" class="from-cheatsheet">${toCurrency}</th>
                 </tr>
               </thead>
               <tbody>
@@ -534,9 +536,9 @@ class Exchange{
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col" class="to-cheatsheet">DUA</th>
+                  <th scope="col" class="to-cheatsheet">${fromCurrency}</th>
                   <th scope="col"><i class="d-none"></i></th>
-                  <th scope="col" class="from-cheatsheet">AUD</th>
+                  <th scope="col" class="from-cheatsheet">${toCurrency}</th>
                 </tr>
               </thead>
               <tbody>
@@ -579,7 +581,7 @@ class Exchange{
     `;
   }
   
-  cheatsheet(){
+  static initialCheatsheet(){
     const date = Exchange.currentDate();
     const cheatsheet = document.querySelector(".traveller-cheatsheet");
     cheatsheet.innerHTML = Exchange.cheatsheetHTML(date);
