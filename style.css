@@ -93,8 +93,8 @@ option{
 .currency-information h4{
   border-bottom: 4px solid rgb(201, 194, 194);
 }
-.information{
-  background: rgb(191, 235, 232);
+.information, .traveller-cheatsheet{
+  background: rgb(162, 212, 208);
 }
 
 

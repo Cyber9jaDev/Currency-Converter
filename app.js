@@ -253,45 +253,39 @@ class Exchange{
                 <span class="exchange-span-1">Symbol</span>
                 <span class="symbol symbol-2 exchange-span-2">${toCurrencySymbol}</span>
               </div>
-              <div class="d-flex flex-row">
-                <span class="exchange-span-1">Symbol</span>
-                <span class="symbol symbol-2 exchange-span-2">${toCurrencySymbol}</span>
-              </div>
             </div>
           </div>
-
-          <!-- Current Rate and the last seven days -->
 
           <div class="col-md-4 bg-secondary my-2 pb-3">
             <h4 class="text-light text-opacity-75 lead fs-3 mt-3">Latest Exchange Rates</h4>
             <div class="d-flex flex-column px-3">
               <div class="d-flex flex-row">
                 <span class="exchange-span-1 date"></span>
-                <span class="exchange-span-2 rate text-end"></span>
+                <span class="exchange-span-2 rate"></span>
               </div>
               <div class="d-flex flex-row">
                 <span class="exchange-span-1 date"></span>
-                <span class="exchange-span-2 rate text-end"</span>
+                <span class="exchange-span-2 rate"</span>
               </div>
               <div class="d-flex flex-row">
                 <span class="exchange-span-1 date"></span>
-                <span class="exchange-span-2 rate text-end"></span>
+                <span class="exchange-span-2 rate"></span>
               </div>
               <div class="d-flex flex-row">
                 <span class="exchange-span-1 date"></span>
-                <span class="exchange-span-2 rate text-end"></span>
+                <span class="exchange-span-2 rate"></span>
               </div>
               <div class="d-flex flex-row">
                 <span class="exchange-span-1 date"></span>
-                <span class="exchange-span-2 rate text-end"></span>
+                <span class="exchange-span-2 rate"></span>
               </div>
               <div class="d-flex flex-row">
                 <span class="exchange-span-1 date"></span>
-                <span class="exchange-span-2 rate text-end"></span>
+                <span class="exchange-span-2 rate"></span>
               </div>
               <div class="d-flex flex-row">
                 <span class="exchange-span-1 date"></span>
-                <span class="exchange-span-2 rate text-end"></span>
+                <span class="exchange-span-2 rate"></span>
               </div>
             </div>
           </div>
