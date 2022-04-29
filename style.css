@@ -2,7 +2,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  color: white;
+  /* color: rgb(219, 219, 219); */
 }
 .container-fluid, .container{
   overflow: hidden;
@@ -96,19 +96,17 @@ option{
 }
 .information, .traveller-cheatsheet, .exchange-information{
   background: black;
+  color: white;
 }
 .table-col{
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: white;
   text-align: center;
   background-color: rgb(11, 6, 6);
   border-radius: 2%;
   margin: 10px 0;
 }
-tr, td{
-  color: white;
-  overflow: hidden;
-}
+
 .fa-angle-double-right{
   color: rgb(70, 70, 218);
 }
