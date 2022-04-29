@@ -92,7 +92,7 @@ class Exchange{
     const previousDates = Exchange.previousDates();
     for(let i =0; i < 7; i++){
       dates[i].innerText = previousDates[i];
-      rates[i].innerText = 1;
+      rates[i].innerText = "1.0000000";
     }
   }
 
@@ -167,11 +167,12 @@ class Exchange{
       fetch(`https://api.vatcomply.com/rates?base=${fromSelectValue}&date=${date}`)
         .then(Exchange.checkResponseAndParse)
         .then((data) => {
-          rates[index].innerText = data.rates[toSelectValue];
+          if(data.rates[toSelectValue] === 1){rates[index].innerText = `${data.rates[toSelectValue]}.0000000`;}
+          else{rates[index].innerText = data.rates[toSelectValue];}
           dates[i].innerText = previousDates[i];
         })
         .catch((err) => {
-          
+          return err;
         });
     });
   }
@@ -180,7 +181,7 @@ class Exchange{
     let information = document.getElementById("information");
     information.innerHTML = `
       <div class="container-lg">
-      <h4 class="text-black lead fs-3 mt-3">Our Currency Converter</h4>
+      <h4 class="text-secondary lead fs-3 mt-3">Our Currency Converter</h4>
       <p class="">
         With our unique currency converter you can easily and quickly
         convert currencies with many advantages: All foreign currencies
@@ -191,12 +192,12 @@ class Exchange{
         tables directly to your mobile or as a printed aid for holidays 
         and business trips.
       </p>
-      <h4 class="text-black lead fs-3 mt-3">Multiple currency converter and cross rates</h4>
+      <h4 class="text-secondary lead fs-3 mt-3">Multiple currency converter and cross rates</h4>
       <p>
         Would you like to convert an amount to multiple other currencies at once? 
         Or are you looking for a typical yet flexible cross rates matrix with many currencies? Then have a look at our unique interactive cross rates.
       </p>
-      <h4 class="text-black lead fs-3 mt-3">Send money abroad and save money</h4>
+      <h4 class="text-secondary lead fs-3 mt-3">Send money abroad and save money</h4>
       <p>
         More and more often individuals and companies send money abroad using 
         specialized providers. Doing so allows them to save a lot compared to 
@@ -204,7 +205,7 @@ class Exchange{
         like to know which remittance provider is the best for your 
         international transfer? Then visit our real-time price comparison of money transfer deals.
       </p>
-      <h4 class="text-black lead fs-3 mt-3">Note</h4>
+      <h4 class="text-secondary lead fs-3 mt-3">Note</h4>
       <p>
         Our money converter (currency convertor) and other tools can assist 
         you in many situations as an additional indicator (online shopping, 
@@ -265,7 +266,7 @@ class Exchange{
               </div>
               <div class="d-flex flex-row">
                 <span class="exchange-span-1 date"></span>
-                <span class="exchange-span-2 rate"</span>
+                <span class="exchange-span-2 rate"></span>
               </div>
               <div class="d-flex flex-row">
                 <span class="exchange-span-1 date"></span>
