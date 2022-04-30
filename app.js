@@ -84,6 +84,7 @@ class Exchange{
         return err;
     });
   }
+
   static loadInitialDatesAndRates(){
     const dates = document.querySelectorAll(".date");
     const rates = document.querySelectorAll(".rate");

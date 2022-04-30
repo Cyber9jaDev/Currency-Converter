@@ -155,4 +155,21 @@ tr{
   .header{
     font-size: 1.7rem;
   }
+  .table-container{
+    flex-direction: column;
+    flex-wrap: wrap;
+    width : 100%;
+    gap: 30;
+    justify-content: space-around;
+  }
+  .table-col{
+    width: 48%;
+  }
+
+  td{
+    font-size: 0.7rem;
+  }
+  i{
+    font-size: 0.4rem;
+  }
 }
