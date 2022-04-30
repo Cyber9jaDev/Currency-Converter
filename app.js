@@ -369,7 +369,7 @@ class Exchange{
                 <tr>
                   <td class="fixed-exchange-rate-from">30</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-from-converted">35.0000</td>
+                  <td class="fixed-exchange-rate-from-converted">30.0000</td>
                 </tr>
                 <tr>
                   <td class="fixed-exchange-rate-from">35</td>
@@ -388,7 +388,7 @@ class Exchange{
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col" class="from-cheatsheet">${fromCurrency}</th>
+                  <th scope="col"class="from-cheatsheet">${fromCurrency}</th>
                   <th scope="col"><i class="d-none"></i></th>
                   <th scope="col" class="to-cheatsheet">${toCurrency}</th>
                 </tr>
@@ -412,7 +412,7 @@ class Exchange{
                 <tr>
                   <td class="fixed-exchange-rate-from">250</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-from-converted">500.0000</td>
+                  <td class="fixed-exchange-rate-from-converted">250.0000</td>
                 </tr>
                 <tr>
                   <td class="fixed-exchange-rate-from">500</td>
@@ -420,7 +420,7 @@ class Exchange{
                   <td class="fixed-exchange-rate-from-converted">500.0000</td>
                 </tr>
                 <tr>
-                  <td class="fixed-exchange-rate-from">100</td>
+                  <td class="fixed-exchange-rate-from">1000</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
                   <td class="fixed-exchange-rate-from-converted">1000.0000</td>
                 </tr>
@@ -500,7 +500,7 @@ class Exchange{
                 <tr>
                   <td class="fixed-exchange-rate-to">30</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-to-converted">35.0000</td>
+                  <td class="fixed-exchange-rate-to-converted">30.0000</td>
                 </tr>
                 <tr>
                   <td class="fixed-exchange-rate-to">35</td>
@@ -543,7 +543,7 @@ class Exchange{
                 <tr>
                   <td class="fixed-exchange-rate-to">250</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-to-converted">500.0000</td>
+                  <td class="fixed-exchange-rate-to-converted">250.0000</td>
                 </tr>
                 <tr>
                   <td class="fixed-exchange-rate-to">500</td>
@@ -551,7 +551,7 @@ class Exchange{
                   <td class="fixed-exchange-rate-to-converted">500.0000</td>
                 </tr>
                 <tr>
-                  <td class="fixed-exchange-rate-to">100</td>
+                  <td class="fixed-exchange-rate-to">1000</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
                   <td class="fixed-exchange-rate-to-converted">1000.0000</td>
                 </tr>
@@ -564,34 +564,37 @@ class Exchange{
     `;
   }
 
+  static multiplyRates(rates, calculatedRate, value, cheatsheet, amount){
+    for(let i = 0; i < 18; i++){
+      const multiplier = parseInt(cheatsheet[i].innerText);
+      const rate = rates[value];
+      calculatedRate[i].innerText = multiplier * amount * rate;
+    }
+    // return fetch(`https://api.vatcomply.com/rates?base=${toSelectValue}`);
+  }
+
   static updateFixedCheatsheetRates(fromSelectValue, toSelectValue){
     const fromFixedCheatsheetRates = document.querySelectorAll(".fixed-exchange-rate-from");
     const fromCalculatedRate = document.querySelectorAll(".fixed-exchange-rate-from-converted");
     const toFixedCheatsheetRates = document.querySelectorAll(".fixed-exchange-rate-to");
-    const toValue = document.querySelectorAll(".fixed-exchange-rate-to-converted");
+    const toCalculatedRate = document.querySelectorAll(".fixed-exchange-rate-to-converted");
+    
     let amount = document.getElementById("amount").value;
     if(amount < 1) return;
-    console.log(amount);
-    
 
     fetch(`https://api.vatcomply.com/rates?base=${fromSelectValue}`)
       .then(Exchange.checkResponseAndParse)
       .then(({rates}) => {
-        for(let i = 0; i < 18; i++){
-          const multiplier = parseInt(fromFixedCheatsheetRates[i].innerText);
-          const rate = rates[toSelectValue];
-          fromCalculatedRate[i].innerText = multiplier * amount * rate;
-          return fetch(`https://api.vatcomply.com/rates?base=${toSelectValue}`);
-        }
+        Exchange.multiplyRates(rates, fromCalculatedRate, toSelectValue, fromFixedCheatsheetRates, amount);
+        return fetch(`https://api.vatcomply.com/rates?base=${toSelectValue}`);
       })
       .then(Exchange.checkResponseAndParse)
       .then(({rates}) => {
-        console.log(rates);
+        Exchange.multiplyRates(rates, toCalculatedRate, fromSelectValue, toFixedCheatsheetRates, amount);
       })
       .catch((err) => {
         return err;
       });
-    
   }
   
   static initialCheatsheet(){
@@ -625,8 +628,6 @@ class Exchange{
     }
     return dates;
   }
-
-
 }
 
 new Exchange();
