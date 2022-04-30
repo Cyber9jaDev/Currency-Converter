@@ -110,7 +110,6 @@ class Exchange{
   }
 
   static calculate(){
-
     let toSelectValue = convertToField.options[convertToField.selectedIndex].text;
     let fromSelectValue = convertFromField.options[convertFromField.selectedIndex].text;
     let fromCurrencyName, toCurrencyName, fromCurrencySymbol, toCurrencySymbol;
@@ -133,9 +132,6 @@ class Exchange{
         return err;
     });  
 
-    
-
-    
   }
 
   static cheatsheet(fromCurrency, toCurrency){
@@ -311,32 +307,32 @@ class Exchange{
                 <tr>
                   <td class="fixed-exchange-rate-from">1</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-from-converted">1.0000</td>
+                  <td class="fixed-exchange-rate-from-converted">1.0</td>
                 </tr>
                 <tr>
                   <td class="fixed-exchange-rate-from">2</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-from-converted">2.0000</td>
+                  <td class="fixed-exchange-rate-from-converted">2.0</td>
                 </tr>
                 <tr>
                   <td class="fixed-exchange-rate-from">3</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-from-converted">3.0000</td>
+                  <td class="fixed-exchange-rate-from-converted">3.0</td>
                 </tr>
                 <tr>
                   <td class="fixed-exchange-rate-from">4</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-from-converted">4.0000</td>
+                  <td class="fixed-exchange-rate-from-converted">4.0</td>
                 </tr>
                 <tr>
                   <td class="fixed-exchange-rate-from">5</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-from-converted">5.0000</td>
+                  <td class="fixed-exchange-rate-from-converted">5.0</td>
                 </tr>
                 <tr>
                   <td class="fixed-exchange-rate-from">10</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-from-converted">10.0000</td>
+                  <td class="fixed-exchange-rate-from-converted">10.0</td>
                 </tr>
               </tbody>
             </table>
@@ -354,32 +350,32 @@ class Exchange{
                 <tr>
                   <td class="fixed-exchange-rate-from">15</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-from-converted">15.0000</td>
+                  <td class="fixed-exchange-rate-from-converted">15.0</td>
                 </tr>
                 <tr>
                   <td class="fixed-exchange-rate-from">20</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-from-converted">20.0000</td>
+                  <td class="fixed-exchange-rate-from-converted">20.0</td>
                 </tr>
                 <tr>
                   <td class="fixed-exchange-rate-from">25</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-from-converted">25.0000</td>
+                  <td class="fixed-exchange-rate-from-converted">25.0</td>
                 </tr>
                 <tr>
                   <td class="fixed-exchange-rate-from">30</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-from-converted">30.0000</td>
+                  <td class="fixed-exchange-rate-from-converted">30.0</td>
                 </tr>
                 <tr>
                   <td class="fixed-exchange-rate-from">35</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-from-converted">35.0000</td>
+                  <td class="fixed-exchange-rate-from-converted">35.0</td>
                 </tr>
                 <tr>
                   <td class="fixed-exchange-rate-from">40</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-from-converted">40.0000</td>
+                  <td class="fixed-exchange-rate-from-converted">40.0</td>
                 </tr>
               </tbody>
             </table>
@@ -397,32 +393,32 @@ class Exchange{
                 <tr>
                   <td class="fixed-exchange-rate-from">45</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-from-converted">45.0000</td>
+                  <td class="fixed-exchange-rate-from-converted">45.0</td>
                 </tr>
                 <tr>
                   <td class="fixed-exchange-rate-from">50</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-from-converted">50.0000</td>
+                  <td class="fixed-exchange-rate-from-converted">50.0</td>
                 </tr>
                 <tr>
                   <td class="fixed-exchange-rate-from">100</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-from-converted">100.0000</td>
+                  <td class="fixed-exchange-rate-from-converted">100.0</td>
                 </tr>
                 <tr>
                   <td class="fixed-exchange-rate-from">250</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-from-converted">250.0000</td>
+                  <td class="fixed-exchange-rate-from-converted">250.0</td>
                 </tr>
                 <tr>
                   <td class="fixed-exchange-rate-from">500</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-from-converted">500.0000</td>
+                  <td class="fixed-exchange-rate-from-converted">500.0</td>
                 </tr>
                 <tr>
                   <td class="fixed-exchange-rate-from">1000</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-from-converted">1000.0000</td>
+                  <td class="fixed-exchange-rate-from-converted">1000.0</td>
                 </tr>
               </tbody>
             </table>
@@ -442,32 +438,32 @@ class Exchange{
                 <tr>
                   <td class="fixed-exchange-rate-to">1</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-to-converted">1.0000</td>
+                  <td class="fixed-exchange-rate-to-converted">1.0</td>
                 </tr>
                 <tr>
                   <td class="fixed-exchange-rate-to">2</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-to-converted">2.0000</td>
+                  <td class="fixed-exchange-rate-to-converted">2.0</td>
                 </tr>
                 <tr>
                   <td class="fixed-exchange-rate-to">3</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-to-converted">3.0000</td>
+                  <td class="fixed-exchange-rate-to-converted">3.0</td>
                 </tr>
                 <tr>
                   <td class="fixed-exchange-rate-to">4</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-to-converted">4.0000</td>
+                  <td class="fixed-exchange-rate-to-converted">4.0</td>
                 </tr>
                 <tr>
                   <td class="fixed-exchange-rate-to">5</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-to-converted">5.0000</td>
+                  <td class="fixed-exchange-rate-to-converted">5.0</td>
                 </tr>
                 <tr>
                   <td class="fixed-exchange-rate-to">10</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-to-converted">10.0000</td>
+                  <td class="fixed-exchange-rate-to-converted">10.0</td>
                 </tr>
               </tbody>
             </table>
@@ -485,32 +481,32 @@ class Exchange{
                 <tr>
                   <td class="fixed-exchange-rate-to">15</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-to-converted">15.0000</td>
+                  <td class="fixed-exchange-rate-to-converted">15.0</td>
                 </tr>
                 <tr>
                   <td class="fixed-exchange-rate-to">20</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-to-converted">20.0000</td>
+                  <td class="fixed-exchange-rate-to-converted">20.0</td>
                 </tr>
                 <tr>
                   <td class="fixed-exchange-rate-to">25</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-to-converted">25.0000</td>
+                  <td class="fixed-exchange-rate-to-converted">25.0</td>
                 </tr>
                 <tr>
                   <td class="fixed-exchange-rate-to">30</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-to-converted">30.0000</td>
+                  <td class="fixed-exchange-rate-to-converted">30.0</td>
                 </tr>
                 <tr>
                   <td class="fixed-exchange-rate-to">35</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-to-converted">35.0000</td>
+                  <td class="fixed-exchange-rate-to-converted">35.0</td>
                 </tr>
                 <tr>
                   <td class="fixed-exchange-rate-to">40</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-to-converted">40.0000</td>
+                  <td class="fixed-exchange-rate-to-converted">40.0</td>
                 </tr>
               </tbody>
             </table>
@@ -528,32 +524,32 @@ class Exchange{
                 <tr>
                   <td class="fixed-exchange-rate-to">45</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-to-converted">45.0000</td>
+                  <td class="fixed-exchange-rate-to-converted">45.0</td>
                 </tr>
                 <tr>
                   <td class="fixed-exchange-rate-to">50</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-to-converted">50.0000</td>
+                  <td class="fixed-exchange-rate-to-converted">50.0</td>
                 </tr>
                 <tr>
                   <td class="fixed-exchange-rate-to">100</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-to-converted">100.0000</td>
+                  <td class="fixed-exchange-rate-to-converted">100.0</td>
                 </tr>
                 <tr>
                   <td class="fixed-exchange-rate-to">250</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-to-converted">250.0000</td>
+                  <td class="fixed-exchange-rate-to-converted">250.0</td>
                 </tr>
                 <tr>
                   <td class="fixed-exchange-rate-to">500</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-to-converted">500.0000</td>
+                  <td class="fixed-exchange-rate-to-converted">500.0</td>
                 </tr>
                 <tr>
                   <td class="fixed-exchange-rate-to">1000</td>
                   <td scope="col"><i class="fas fa-angle-double-right"></i></td>
-                  <td class="fixed-exchange-rate-to-converted">1000.0000</td>
+                  <td class="fixed-exchange-rate-to-converted">1000.0</td>
                 </tr>
               </tbody>
             </table>
@@ -564,13 +560,15 @@ class Exchange{
     `;
   }
 
-  static multiplyRates(rates, calculatedRate, value, cheatsheet, amount){
+  static multiplyRates(rates, calculatedRate, value, cheatsheet){
+    let amount = document.getElementById("amount").value;
+    if(amount < 1) return;
+
     for(let i = 0; i < 18; i++){
       const multiplier = parseInt(cheatsheet[i].innerText);
       const rate = rates[value];
-      calculatedRate[i].innerText = multiplier * amount * rate;
+      calculatedRate[i].innerText = (multiplier * amount * rate).toFixed(1);
     }
-    // return fetch(`https://api.vatcomply.com/rates?base=${toSelectValue}`);
   }
 
   static updateFixedCheatsheetRates(fromSelectValue, toSelectValue){
@@ -578,19 +576,16 @@ class Exchange{
     const fromCalculatedRate = document.querySelectorAll(".fixed-exchange-rate-from-converted");
     const toFixedCheatsheetRates = document.querySelectorAll(".fixed-exchange-rate-to");
     const toCalculatedRate = document.querySelectorAll(".fixed-exchange-rate-to-converted");
-    
-    let amount = document.getElementById("amount").value;
-    if(amount < 1) return;
-
+  
     fetch(`https://api.vatcomply.com/rates?base=${fromSelectValue}`)
       .then(Exchange.checkResponseAndParse)
       .then(({rates}) => {
-        Exchange.multiplyRates(rates, fromCalculatedRate, toSelectValue, fromFixedCheatsheetRates, amount);
+        Exchange.multiplyRates(rates, fromCalculatedRate, toSelectValue, fromFixedCheatsheetRates);
         return fetch(`https://api.vatcomply.com/rates?base=${toSelectValue}`);
       })
       .then(Exchange.checkResponseAndParse)
       .then(({rates}) => {
-        Exchange.multiplyRates(rates, toCalculatedRate, fromSelectValue, toFixedCheatsheetRates, amount);
+        Exchange.multiplyRates(rates, toCalculatedRate, fromSelectValue, toFixedCheatsheetRates);
       })
       .catch((err) => {
         return err;
