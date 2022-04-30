@@ -98,13 +98,32 @@ option{
   background: black;
   color: white;
 }
+.table-container{
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 100%;
+  align-items: center;
+}
 .table-col{
   font-size: 0.8rem;
   color: white;
   text-align: center;
   background-color: rgb(11, 6, 6);
-  border-radius: 2%;
+  border-radius: 1%;
   margin: 10px 0;
+  width: 49%;
+}
+.button{
+  background-color: rgb(70, 70, 218);
+  color: whitesmoke;
+  width: 85px;
+  font-size: 1rem;
+  
+}
+.button:hover{
+  background-color: rgb(0, 204, 255);
+  color: white;
+  transition: ease-in-out 2s;
 }
 
 .fa-angle-double-right{
@@ -129,6 +148,9 @@ tr{
   }
   .arrow{
     width: 100%;
+  }
+  .fa-exchange-alt{
+    font-size: 1.2rem;
   }
   .results-container{
     justify-content: flex-start;
@@ -156,11 +178,8 @@ tr{
     font-size: 1.7rem;
   }
   .table-container{
-    flex-direction: column;
     flex-wrap: wrap;
-    width : 100%;
-    gap: 30;
-    justify-content: space-around;
+    justify-content: space-evenly;
   }
   .table-col{
     width: 48%;
@@ -169,7 +188,7 @@ tr{
   td{
     font-size: 0.7rem;
   }
-  i{
+  td i{
     font-size: 0.4rem;
   }
 }
