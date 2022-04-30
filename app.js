@@ -103,7 +103,6 @@ class Exchange{
     document.querySelector(".iso-code-1").innerText = fromCurrencyName;
     fromCurrencySymbol = data[fromSelectValue].symbol;
     document.querySelector(".symbol-1").innerText = fromCurrencySymbol;
-
     document.querySelector(".currency-2").innerText = toSelectValue;
     toCurrencyName = data[toSelectValue].name;
     document.querySelector(".iso-code-2").innerText = toCurrencyName;
@@ -126,30 +125,15 @@ class Exchange{
         return fetch("https://api.vatcomply.com/currencies");
       })
       .then(Exchange.checkResponseAndParse)
-      .then((data) => {Exchange.displayCurrencyCodeSymbol(data, fromSelectValue, fromCurrencyName, fromCurrencySymbol, toSelectValue, toCurrencyName, toCurrencySymbol); })
-      .then(Exchange.checkResponseAndParse)
-      .catch((err) => {
-        return err;
-    });   // Fetch object ends here
-
-
-    // Get the current Date
-    const date = Exchange.currentDate();
-    fetch(`https://api.vatcomply.com/rates?base=AUD&date=${date}`)
-      .then(Exchange.checkResponseAndParse)
-      .then(Exchange.loadDatesAndRates)
-      .then(()=> {
-        fetch()
-        .then((result) => {
-          
-        }).catch((err) => {
-          
-        });
+      .then((data) => {
+        Exchange.displayCurrencyCodeSymbol(data, fromSelectValue, fromCurrencyName, fromCurrencySymbol, toSelectValue, toCurrencyName, toCurrencySymbol); 
+        Exchange.loadDatesAndRates(fromSelectValue, toSelectValue);
       })
+      .then(Exchange.checkResponseAndParse)
+
       .catch((err) => {
         return err;
-    });
-
+    });  
   }
 
   static cheatsheet(fromCurrency, toCurrency){
@@ -158,14 +142,11 @@ class Exchange{
     cheatsheet.innerHTML = Exchange.cheatsheetHTML(date, fromCurrency, toCurrency);
   }
 
-
-  static loadDatesAndRates(){
+  static loadDatesAndRates(fromSelectValue, toSelectValue){
     const dates = document.querySelectorAll(".date");
     const rates = document.querySelectorAll(".rate");
     const previousDates = Exchange.previousDates();
     
-    let toSelectValue = convertToField.options[convertToField.selectedIndex].text; 
-    let fromSelectValue = convertFromField.options[convertFromField.selectedIndex].text;
     previousDates.forEach((date, index) => {
       fetch(`https://api.vatcomply.com/rates?base=${fromSelectValue}&date=${date}`)
         .then(Exchange.checkResponseAndParse)
@@ -612,7 +593,6 @@ class Exchange{
     }
     return dates;
   }
-    
 }
 
 new Exchange();
