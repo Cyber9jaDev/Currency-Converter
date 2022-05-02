@@ -4,7 +4,7 @@
   box-sizing: border-box;
   /* color: rgb(219, 219, 219); */
 }
-.container-fluid, .container{
+.container-fluid, .container, .container-lg{
   overflow: hidden;
 }
 .header{

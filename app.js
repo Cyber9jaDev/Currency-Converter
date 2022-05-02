@@ -134,9 +134,6 @@ class Exchange{
       .catch((err) => {
         return err;
     });  
-
-    // Exchange.swapCurrency(fromSelectValue, toSelectValue);
-
   }
 
   static cheatsheet(fromCurrency, toCurrency){
@@ -553,7 +550,7 @@ class Exchange{
     convertToField.value = fromSelectValue;
     Exchange.calculate();
   }
+
 }
   
-
 new Exchange();
