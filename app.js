@@ -6,6 +6,7 @@ let result = document.getElementById("result");
 const showOutputCurrency = document.querySelector(".output-cur");
 const showResultCurrency = document.querySelector(".cur-result");
 const exchangeInformation = document.getElementById("exchange-information");
+const swap = document.querySelector(".arrow");
 
 
 
@@ -15,7 +16,7 @@ class Exchange{
     window.addEventListener("DOMContentLoaded", Exchange.initialCheatsheet);
     window.addEventListener("DOMContentLoaded", Exchange.showExchangeInformation);
     window.addEventListener("DOMContentLoaded", Exchange.loadInitialDatesAndRates);
-    window.addEventListener("DOMContentLoaded", Exchange.currencies);
+    window.addEventListener("DOMContentLoaded", Exchange.currencies);       
   }
 
   static getKeys(keys, select){
@@ -48,6 +49,7 @@ class Exchange{
         convertFromField.addEventListener("input", Exchange.calculate);
         convertToField.addEventListener("input", Exchange.calculate);
         amount.addEventListener("input", Exchange.calculate);
+        swap.addEventListener("click", Exchange.swapCurrency);
       })
       .catch((err) => {
         return err;
@@ -111,8 +113,8 @@ class Exchange{
   }
 
   static calculate(){
-    let toSelectValue = convertToField.options[convertToField.selectedIndex].text;
-    let fromSelectValue = convertFromField.options[convertFromField.selectedIndex].text;
+    let toSelectValue = convertToField.options[convertToField.selectedIndex].value;
+    let fromSelectValue = convertFromField.options[convertFromField.selectedIndex].value;
     let fromCurrencyName, toCurrencyName, fromCurrencySymbol, toCurrencySymbol;
     
     fetch(`https://api.vatcomply.com/rates?base=${fromSelectValue}`)
@@ -132,6 +134,8 @@ class Exchange{
       .catch((err) => {
         return err;
     });  
+
+    // Exchange.swapCurrency(fromSelectValue, toSelectValue);
 
   }
 
@@ -541,6 +545,15 @@ class Exchange{
     }
     return dates;
   }
+
+  static swapCurrency(){
+    let toSelectValue = convertToField.options[convertToField.selectedIndex].value;
+    let fromSelectValue = convertFromField.options[convertFromField.selectedIndex].value;
+    convertFromField.value = toSelectValue;
+    convertToField.value = fromSelectValue;
+    Exchange.calculate();
+  }
 }
+  
 
 new Exchange();
