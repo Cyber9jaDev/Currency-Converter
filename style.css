@@ -139,8 +139,7 @@ tr{
   color: white;
 }
 .accordion-item{
-  margin: 15px 0;
-  /* background-color: rgb(70, 70, 218); */
+  margin: 20px 0;
 }
 .accordion-button{
   background: rgb(70, 70, 218);
