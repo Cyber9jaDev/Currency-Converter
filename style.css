@@ -2,8 +2,14 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  /* color: rgb(219, 219, 219); */
 }
+.accordion-button:not(.collapsed), .accordion-button:not(.collapsed):focus  {
+  box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px;
+  background-color: rgb(70, 70, 218);
+  border: none;
+  color: white;
+}
+
 .container-fluid, .container, .container-lg{
   overflow: hidden;
 }
@@ -31,7 +37,7 @@
   display: flex;
   color: white;
   width: 80%;
-  background-color: rgb(70, 70, 218);;
+  background-color: rgb(70, 70, 218);
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -132,6 +138,20 @@ option{
 tr{
   color: white;
 }
+.accordion-item{
+  margin: 15px 0;
+  /* background-color: rgb(70, 70, 218); */
+}
+.accordion-button{
+  background: rgb(70, 70, 218);
+  border: none;
+}
+.accordion-header button{
+  color: white;
+}
+/* .accordion-collapse{
+  border: none;
+} */
 
 /* MEDIA QUERIES */
 
@@ -161,7 +181,7 @@ tr{
     font-size: 0.85rem;
     text-align: justify;
   }
-  option, select, label, input{
+  option, select, label, input, .accordion-body{
     font-size: 0.85rem;
   }
   .results-container span, .results-container div{
