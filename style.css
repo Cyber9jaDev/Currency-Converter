@@ -2,6 +2,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 .accordion-button:not(.collapsed), .accordion-button:not(.collapsed):focus  {
   box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px;
