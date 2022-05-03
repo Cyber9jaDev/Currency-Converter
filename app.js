@@ -8,8 +8,6 @@ const showResultCurrency = document.querySelector(".cur-result");
 const exchangeInformation = document.getElementById("exchange-information");
 const swap = document.querySelector(".arrow");
 
-
-
 class Exchange{
   constructor(){
     window.addEventListener("DOMContentLoaded", Exchange.showCurrencyInformation);
@@ -168,11 +166,9 @@ class Exchange{
       <h4 class="text-secondary lead fs-3 mt-3">Our Currency Converter</h4>
       <p class="">
         With our unique currency converter you can easily and quickly
-        convert currencies with many advantages: All foreign currencies
-        of the world, gold price and Bitcoin. Updates every 5 minutes.
-        Historical financial data of the past 15 years. Fast and comfortable 
-        like a mobile app. Additional features like conversion history,
-        copy result or inverse conversion. Interactive chart. Handy conversion 
+        convert currencies with many advantages: 32 foreign currencies
+        of the world, updates every 5 minutes, historical financial data of the past 15 years, fast and comfortable 
+        like a mobile app, handy conversion 
         tables directly to your mobile or as a printed aid for holidays 
         and business trips.
       </p>
@@ -191,10 +187,9 @@ class Exchange{
       </p>
       <h4 class="text-secondary lead fs-3 mt-3">Note</h4>
       <p>
-        Our money converter (currency convertor) and other tools can assist 
+        Our money converter and other tools can assist 
         you in many situations as an additional indicator (online shopping, 
-        hotel booking, foreign exchange / FOREX / FX trading, conversion of stock quotes and investment products, loan comparison, checking credit card statements etc.). 
-        But in any case please read our disclaimer before!
+        hotel booking. But in any case please read our disclaimer before!
       </p>
     </div>
   `;
