@@ -171,9 +171,6 @@ li a{
   color: white;
   font-size: 1rem;
 }
-.documentation-container div span{
-  font-size: 3rem;
-}
 
 #footer{
   background: rgb(70, 70, 218);
@@ -237,12 +234,12 @@ li a{
     font-size: 0.4rem;
   }
   li a{
-    font-size: 0.88rem;
+    font-size: 0.84rem;
   }
   .documentation-container .col{
     flex-basis: 30%;
-  } 
-  .documentation-container .col span{
-    font-size: 2rem;
-  } 
+  }
+  .help{
+    margin-top: 20px;
+  }
 }
