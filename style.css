@@ -166,7 +166,7 @@ tr{
 li {
   list-style: none;
 }
-li a{
+li a, span a{
   text-decoration: none;
   color: white;
   font-size: 1rem;
@@ -190,7 +190,7 @@ footer{
   align-items: center;
 }
 .icon-container i, .icons i{
-  color: white;
+  /* color: white; */
 }
 .contact-info{
   display: flex;
@@ -257,8 +257,11 @@ footer{
   td i{
     font-size: 0.4rem;
   }
-  li a{
+  li a, #documentation a, article{
     font-size: 0.84rem;
+  }
+  #documentation h5{
+    font-size: 1rem;
   }
   .documentation-container .col{
     flex-basis: 30%;
