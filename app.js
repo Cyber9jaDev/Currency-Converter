@@ -7,6 +7,7 @@ const showOutputCurrency = document.querySelector(".output-cur");
 const showResultCurrency = document.querySelector(".cur-result");
 const exchangeInformation = document.getElementById("exchange-information");
 const swap = document.querySelector(".arrow");
+const footerDate = document.querySelector(".footer-date");
 
 class Exchange{
   constructor(){
@@ -15,6 +16,7 @@ class Exchange{
     window.addEventListener("DOMContentLoaded", Exchange.showExchangeInformation);
     window.addEventListener("DOMContentLoaded", Exchange.loadInitialDatesAndRates);
     window.addEventListener("DOMContentLoaded", Exchange.currencies);       
+    window.addEventListener("DOMContentLoaded", Exchange.footerDate);
   }
 
   static getKeys(keys, select){
@@ -544,6 +546,12 @@ class Exchange{
     convertFromField.value = toSelectValue;
     convertToField.value = fromSelectValue;
     Exchange.calculate();
+  }
+
+  static footerDate(){
+    const d = new Date();
+    const year = d.getFullYear();
+    footerDate.innerText = year;
   }
 
 }

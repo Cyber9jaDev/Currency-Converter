@@ -100,7 +100,9 @@ option{
   display: block;
   width: 40px;
 }
-
+footer{
+  background: rgb(70, 70, 218);
+}
 .results-container-1, .results-container-3{
   word-wrap: break-word;
   word-break: break-all;
@@ -170,10 +172,6 @@ li a, span a{
   text-decoration: none;
   color: white;
   font-size: 1rem;
-}
-
-footer{
-  /* background: rgb(70, 70, 218); */
 }
 
 .contact{
