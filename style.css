@@ -172,19 +172,33 @@ li a{
   font-size: 1rem;
 }
 
-#footer{
+footer{
   /* background: rgb(70, 70, 218); */
 }
+
 .contact{
-  background: red;
   display: flex;
-  align-content: center;
-  /* height: 100%; */
-  /* width: 100%; */
-  /* align-items: center; */
-
-
+  margin: 5px 0;
+  height: 100%;
+  width: 100%;
+  align-items: center;
 }
+
+.icon-container{
+  display: flex;
+  flex-basis: 10%;
+  align-items: center;
+}
+.icon-container i, .icons i{
+  color: white;
+}
+.contact-info{
+  display: flex;
+  flex-basis: 90%;
+  align-items: center;
+}
+
+
 /* MEDIA QUERIES */
 
 @media only screen and (max-width: 700px) {
