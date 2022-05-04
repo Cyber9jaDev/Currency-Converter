@@ -173,7 +173,17 @@ li a{
 }
 
 #footer{
-  background: rgb(70, 70, 218);
+  /* background: rgb(70, 70, 218); */
+}
+.contact{
+  background: red;
+  display: flex;
+  align-content: center;
+  /* height: 100%; */
+  /* width: 100%; */
+  /* align-items: center; */
+
+
 }
 /* MEDIA QUERIES */
 
