@@ -164,7 +164,7 @@ class Exchange{
   static showCurrencyInformation(){
     let information = document.getElementById("information");
     information.innerHTML = `
-      <div class="container-lg">
+    <div class="container-lg">
       <h4 class="text-secondary lead fs-3 mt-3">Our Currency Converter</h4>
       <p class="">
         With our unique currency converter you can easily and quickly
@@ -202,7 +202,8 @@ class Exchange{
   static exchangeHTML(fromCurrency = "AUD", toCurrency = "AUD", fromCurrencyCode = "Australian Dollar", toCurrencyCode ="Australian Dollar", fromCurrencySymbol = "A$", toCurrencySymbol ="A$"){
     return `
       <div class="currency-information container-lg d-flex m-auto w-100 justify-content-center flex-column">
-        <div class="row d-flex justify-content-around">
+      <div class="container-lg">
+      <div class="row d-flex justify-content-around">
           <div class="col-md-4 pb-2">
             <h4 class="lead fs-3 mt-3">From Currency</h4>
             <div class="d-flex flex-column">
@@ -271,6 +272,8 @@ class Exchange{
               </div>
             </div>
           </div>
+        </div>
+        
         </div>
       </div>
     `;
