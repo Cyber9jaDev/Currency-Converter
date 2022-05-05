@@ -188,19 +188,21 @@ li a, span a{
   display: flex;
   flex-basis: 10%;
   align-items: center;
+  color: rgb(70, 70, 218);
 }
-.icon-container i, .icons i{
-  /* color: white; */
-}
+
 .contact-info{
   display: flex;
   flex-basis: 90%;
   align-items: center;
+  
 }
 .date, .rate, .exchange-span-2, .exchange-span-1{
   color: black;
 }
-
+.icons{
+  color: rgb(70, 70, 218);
+}
 
 /* MEDIA QUERIES */
 
@@ -278,5 +280,8 @@ li a, span a{
   .date, .rate, .exchange-span-2, .exchange-span-1{
     font-size: 0.95rem;
     color: black;
+  }
+  .symbol, .iso-code{
+    color: rgb(184, 29, 29);
   }
 }
