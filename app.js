@@ -483,7 +483,7 @@ class Exchange{
     for(let i = 0; i < 12; i++){
       const multiplier = parseInt(cheatsheet[i].innerText);
       const rate = rates[value];
-      calculatedRate[i].innerText = (multiplier * amount * rate).toFixed(1);
+      calculatedRate[i].innerText = (multiplier * amount * rate).toFixed(3);
     }
   }
 

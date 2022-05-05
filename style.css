@@ -197,6 +197,9 @@ li a, span a{
   flex-basis: 90%;
   align-items: center;
 }
+.date, .rate, .exchange-span-2, .exchange-span-1{
+  color: black;
+}
 
 
 /* MEDIA QUERIES */
@@ -274,5 +277,6 @@ li a, span a{
   }
   .date, .rate, .exchange-span-2, .exchange-span-1{
     font-size: 0.95rem;
+    color: black;
   }
 }
