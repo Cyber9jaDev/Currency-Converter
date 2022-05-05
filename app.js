@@ -201,11 +201,11 @@ class Exchange{
 
   static exchangeHTML(fromCurrency = "AUD", toCurrency = "AUD", fromCurrencyCode = "Australian Dollar", toCurrencyCode ="Australian Dollar", fromCurrencySymbol = "A$", toCurrencySymbol ="A$"){
     return `
-      <div class="currency-information container-lg m-auto d-flex justify-content-center flex-column">
+      <div class="currency-information container-lg d-flex justify-content-center flex-column">
         <div class="row d-flex justify-content-around">
-          <div class="col-md-4 bg-secondary my-2 pb-3">
-            <h4 class="text-light text-opacity-75 lead fs-3 mt-3">From Currency</h4>
-            <div class="d-flex flex-column px-3">
+          <div class="col-md-4 pb-2">
+            <h4 class="lead fs-3 mt-3">From Currency</h4>
+            <div class="d-flex flex-column">
               <div class="d-flex flex-row">
                 <span class="exchange-span-1">Currency</span>
                 <span class="currency currency-1 exchange-span-2">${fromCurrency}</span>
@@ -220,9 +220,9 @@ class Exchange{
               </div>
             </div>
           </div>
-          <div class="col-md-4 bg-secondary my-2 pb-3">
-            <h4 class="text-light text-opacity-75 lead fs-3 mt-3">To Currency</h4>
-            <div class="d-flex flex-column px-3">
+          <div class="col-md-4 pb-2">
+            <h4 class="lead fs-3 mt-3">To Currency</h4>
+            <div class="d-flex flex-column">
               <div class="d-flex flex-row">
                 <span class="exchange-span-1">Currency</span>
                 <span class="currency currency-2 exchange-span-2">${toCurrency}</span>
@@ -238,9 +238,9 @@ class Exchange{
             </div>
           </div>
 
-          <div class="col-md-4 bg-secondary my-2 pb-3">
-            <h4 class="text-light text-opacity-75 lead fs-3 mt-3">Latest Exchange Rates</h4>
-            <div class="d-flex flex-column px-3">
+          <div class="col-md-4 pb-2">
+            <h4 class="lead fs-3 mt-3">Latest Exchange Rates</h4>
+            <div class="d-flex flex-column">
               <div class="d-flex flex-row">
                 <span class="exchange-span-1 date"></span>
                 <span class="exchange-span-2 rate"></span>

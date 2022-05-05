@@ -18,6 +18,10 @@
   flex-direction: column;
   width: 100%;
 }
+.currency-information h4{
+  color: rgb(70, 70, 218);
+  border-bottom: 4px solid rgb(70, 70, 218);
+}
 .accordion-button:not(.collapsed), .accordion-button:not(.collapsed):focus  {
   box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px;
   background-color: rgb(70, 70, 218);
@@ -29,7 +33,7 @@
   overflow: hidden;
 }
 .header{
-  color: rgb(70, 70, 218);;
+  color: rgb(70, 70, 218);
 }
 .form-row{
   display: flex;
@@ -114,9 +118,7 @@ footer{
 .exchange-span-2{
   justify-content: flex-end;
 }
-.currency-information h4{
-  border-bottom: 4px solid rgb(201, 194, 194);
-}
+
 .information, .traveller-cheatsheet, .exchange-information{
   background: black;
   color: white;
@@ -239,7 +241,7 @@ li a, span a{
     align-items: center;
   }
   .header{
-    font-size: 1.9rem;
+    font-size: 2.1rem;
   }
   .table-container{
     flex-wrap: wrap;
@@ -269,5 +271,8 @@ li a, span a{
   }
   footer{
     font-size: 0.88rem;
+  }
+  .date, .rate, .exchange-span-2, .exchange-span-1{
+    font-size: 0.95rem;
   }
 }
