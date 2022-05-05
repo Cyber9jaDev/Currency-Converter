@@ -267,4 +267,7 @@ li a, span a{
   .help{
     margin-top: 20px;
   }
+  footer{
+    font-size: 0.8rem;
+  }
 }
